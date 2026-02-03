@@ -1,0 +1,89 @@
+{
+  "common": {
+    "app_name": "HealthID",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "logout": "Logout",
+    "profile": "Profile",
+    "language": "Language",
+    "settings": "Settings"
+  },
+  "nav": {
+    "overview": "Overview",
+    "records": "Health Records",
+    "visits": "Doctor Visits",
+    "prescriptions": "Prescriptions",
+    "lab_reports": "Lab Reports",
+    "pharmacy": "Pharmacy",
+    "reminders": "Reminders",
+    "support": "Support"
+  },
+  "auth": {
+    "sign_in": "Sign In",
+    "sign_up": "Create Account",
+    "phone": "Phone Number",
+    "email": "Email",
+    "password": "Password",
+    "otp": "One-Time Password",
+    "verify_otp": "Verify OTP",
+    "otp_sent": "OTP sent to your phone",
+    "resend_otp": "Resend OTP",
+    "google_sign_in": "Sign in with Google",
+    "select_role": "Select Your Role",
+    "worker": "Migrant Worker",
+    "doctor": "Doctor",
+    "ngo": "NGO Staff",
+    "pharmacy": "Pharmacy",
+    "admin": "Administrator"
+  },
+  "worker": {
+    "register": "Register as Migrant Worker",
+    "full_name": "Full Name",
+    "languages": "Languages You Speak",
+    "qr_id": "Your Health ID",
+    "qr_generated": "Your unique QR health ID has been generated",
+    "download_qr": "Download QR Code",
+    "print_qr": "Print QR Code"
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "recent_visits": "Recent Doctor Visits",
+    "upcoming_appointments": "Upcoming Appointments",
+    "active_prescriptions": "Active Prescriptions",
+    "health_summary": "Health Summary",
+    "view_all": "View All",
+    "no_data": "No data available"
+  },
+  "qr": {
+    "scan": "Scan Health QR",
+    "scanning": "Scanning QR Code...",
+    "worker_info": "Worker Information",
+    "health_records": "Health Records",
+    "open_record": "Open Full Record",
+    "start_visit": "Start New Visit"
+  },
+  "pharmacy": {
+    "title": "Pharmacy Dashboard",
+    "queue": "Prescription Queue",
+    "dispense": "Dispense Medication",
+    "dispensed": "Dispensed",
+    "pending": "Pending",
+    "scan_qr_to_start": "Scan worker QR to start dispensing",
+    "quantity": "Quantity",
+    "instructions": "Instructions",
+    "dispense_success": "Medication dispensed successfully"
+  },
+  "chatbot": {
+    "hello": "Hi! I'm your Health Assistant. How can I help?",
+    "reminders": "Set Reminder",
+    "lookup": "Look Up Worker",
+    "navigation": "Navigate to",
+    "type_message": "Type your message..."
+  }
+}
