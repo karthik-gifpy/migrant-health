@@ -1,7 +1,13 @@
 import { useState } from 'react';
-import { Button, Card, FormField, Badge } from '../../components/ui';
+import Link from 'next/link';
+import { Button, Card } from '../../components/ui';
 
-const PROVIDER_ROLES = ['doctor', 'ngo', 'pharmacy', 'admin'];
+const PROVIDER_ROLES = [
+  { id: 'doctor', name: 'Doctor', icon: '👨‍⚕️', desc: 'Manage patients and prescriptions' },
+  { id: 'ngo', name: 'NGO/Clinic', icon: '🏥', desc: 'Register workers and manage camps' },
+  { id: 'pharmacy', name: 'Pharmacy', icon: '💊', desc: 'Dispense and track medicines' },
+  { id: 'admin', name: 'Administrator', icon: '⚙️', desc: 'System administration' }
+];
 
 export default function ProviderAuth() {
   const [email, setEmail] = useState('');
@@ -9,82 +15,103 @@ export default function ProviderAuth() {
   const [loading, setLoading] = useState(false);
 
   const handleGoogleSignIn = async () => {
+    if (!email || !selectedRole) return;
     setLoading(true);
-    // Simulate Google OAuth
     setTimeout(() => {
-      if (email) {
-        alert(`Signed in as ${email}`);
-        setLoading(false);
-      }
+      alert(`Signed in as ${selectedRole}`);
+      setLoading(false);
     }, 1000);
   };
 
-  const handleRoleSelect = (role) => {
-    setSelectedRole(role);
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-cyan-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
-        <h1 className="text-2xl font-bold text-slate-900 mb-6">Healthcare Provider Sign In</h1>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-cyan-50 to-emerald-50 flex items-center justify-center p-4">
+      {/* Decorative Background */}
+      <div className="absolute top-20 left-10 w-48 h-48 bg-indigo-200/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-10 right-20 w-48 h-48 bg-cyan-200/20 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div className="space-y-4">
-          <FormField label="Email Address" required>
+      <div className="w-full max-w-lg relative z-10">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <Link href="/" className="inline-flex items-center gap-2 mb-6">
+            <span className="text-4xl">🏥</span>
+            <span className="text-2xl font-bold text-indigo-600">HealthID</span>
+          </Link>
+          <h1 className="text-3xl font-bold text-slate-900">Healthcare Provider</h1>
+          <p className="text-slate-600 mt-2">Sign in to manage your patients and operations</p>
+        </div>
+
+        <Card className="bg-white border-slate-200 space-y-6">
+          {/* Email Input */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-900 mb-2">Email Address</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="doctor@example.com"
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="provider@hospital.com"
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all"
               required
             />
-          </FormField>
+          </div>
 
+          {/* Google Sign In Button */}
           <Button 
-            onClick={handleGoogleSignIn} 
-            disabled={loading || !email}
-            variant="secondary"
-            className="w-full"
+            onClick={handleGoogleSignIn}
+            disabled={!email || !selectedRole || loading}
+            className="w-full bg-gradient-to-r from-indigo-600 to-cyan-500 text-white"
           >
-            {loading ? 'Signing in...' : '🔗 Sign in with Google'}
+            {loading ? '⏳ Signing in...' : '🔗 Sign in with Google'}
           </Button>
 
-          <div className="relative my-6">
+          {/* Divider */}
+          <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-300"></div>
+              <div className="w-full border-t border-slate-200"></div>
             </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-slate-600">Select Your Role</span>
+            <div className="relative flex justify-center">
+              <span className="px-3 bg-white text-sm font-medium text-slate-600">Select Your Role</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
+          {/* Role Selection */}
+          <div className="grid grid-cols-2 gap-3">
             {PROVIDER_ROLES.map((role) => (
               <button
-                key={role}
-                onClick={() => handleRoleSelect(role)}
-                className={`p-3 rounded-lg border-2 transition-all ${
-                  selectedRole === role
-                    ? 'border-indigo-600 bg-indigo-50'
-                    : 'border-slate-200 hover:border-slate-300'
+                key={role.id}
+                onClick={() => setSelectedRole(role.id)}
+                className={`p-4 rounded-xl border-2 transition-all text-center ${
+                  selectedRole === role.id
+                    ? 'border-indigo-600 bg-indigo-50 shadow-md'
+                    : 'border-slate-200 hover:border-slate-300 bg-slate-50'
                 }`}
               >
-                <div className="text-sm font-medium capitalize text-slate-900">{role}</div>
+                <div className="text-3xl mb-2">{role.icon}</div>
+                <div className="text-sm font-semibold text-slate-900">{role.name}</div>
+                <div className="text-xs text-slate-500 mt-1">{role.desc}</div>
               </button>
             ))}
           </div>
 
+          {/* Continue Button */}
           {selectedRole && (
             <Button 
-              onClick={() => alert(`Logged in as ${selectedRole}`)}
-              disabled={loading}
-              className="w-full"
+              onClick={handleGoogleSignIn}
+              disabled={!email || loading}
+              className="w-full bg-gradient-to-r from-emerald-600 to-teal-500 text-white"
             >
-              Continue as {selectedRole}
+              Continue as {PROVIDER_ROLES.find(r => r.id === selectedRole)?.name}
             </Button>
           )}
-        </div>
-      </Card>
+        </Card>
+
+        {/* Footer */}
+        <p className="text-center text-sm text-slate-600 mt-6">
+          New provider?{' '}
+          <Link href="/" className="text-indigo-600 hover:text-indigo-700 font-semibold">
+            Request access
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

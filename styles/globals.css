@@ -1,6 +1,44 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme inline {
+  /* Primary Colors */
+  --color-primary: #6366f1;
+  --color-primary-dark: #4f46e5;
+  --color-primary-light: #818cf8;
+  --color-primary-50: #f5f3ff;
+
+  /* Secondary Colors */
+  --color-secondary: #06b6d4;
+  --color-secondary-dark: #0891b2;
+  --color-secondary-light: #22d3ee;
+  --color-secondary-50: #ecf8fa;
+
+  /* Accent Colors */
+  --color-accent: #10b981;
+  --color-accent-dark: #059669;
+  --color-accent-light: #6ee7b7;
+  --color-accent-50: #ecfdf5;
+
+  /* Warning/Alert */
+  --color-warning: #f59e0b;
+  --color-warning-dark: #d97706;
+  --color-warning-light: #fcd34d;
+
+  /* Backgrounds */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-tertiary: #f1f5f9;
+
+  /* Text */
+  --color-text: #1e293b;
+  --color-text-secondary: #64748b;
+  --color-text-tertiary: #94a3b8;
+  --color-text-light: #cbd5e1;
+
+  /* Borders */
+  --color-border: #e2e8f0;
+  --color-border-dark: #cbd5e1;
+}
 
 * {
   margin: 0;
@@ -10,19 +48,154 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  background-color: #f8fafc;
-  color: #1e293b;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+}
+
+body {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text);
+  font-family: inherit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Smooth Transitions */
+@layer base {
+  * {
+    @apply transition-colors duration-200;
+  }
+
+  button, a {
+    @apply transition-all duration-200 ease-out;
+  }
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Utility Classes */
+@layer components {
+  .bg-primary {
+    @apply bg-indigo-600;
+  }
+
+  .bg-secondary {
+    @apply bg-cyan-500;
+  }
+
+  .bg-accent {
+    @apply bg-emerald-500;
+  }
+
+  .text-primary {
+    @apply text-indigo-600;
+  }
+
+  .text-secondary {
+    @apply text-cyan-600;
+  }
+
+  .text-accent {
+    @apply text-emerald-600;
+  }
+
+  .border-primary {
+    @apply border-indigo-200;
+  }
+
+  .shadow-soft {
+    @apply shadow-sm shadow-slate-200/50;
+  }
+
+  .shadow-card {
+    @apply shadow-md shadow-slate-300/10;
+  }
+
+  .gradient-primary {
+    @apply bg-gradient-to-r from-indigo-600 to-indigo-500;
+  }
+
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-cyan-500 to-blue-500;
+  }
+
+  .gradient-accent {
+    @apply bg-gradient-to-r from-emerald-500 to-teal-500;
+  }
+
+  /* Animation Utilities */
+  .animate-slide-in {
+    animation: slideInUp 0.5s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+    background-size: 1000px 100%;
+  }
+
+  /* Hover Effects */
+  .hover:scale-up {
+    @apply hover:scale-105;
+  }
+
+  .group:hover .group-hover\:scale-up {
+    @apply scale-105;
+  }
+
+  /* Smooth Link Underline */
+  .link-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full;
+  }
 }
